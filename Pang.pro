@@ -9,7 +9,11 @@ SOURCES += main.cpp \
     jugador.cpp \
     frame.cpp \
     disparo.cpp \
-    thunderbolt.cpp
+    thunderbolt.cpp \
+    bufos.cpp \
+    hexagon.cpp \
+    comida.cpp \
+    plataformas.cpp
 
 HEADERS += \
     figure.h \
@@ -17,6 +21,10 @@ HEADERS += \
     jugador.h \
     frame.h \
     disparo.h \
-    thunderbolt.h
+    thunderbolt.h \
+    bufos.h \
+    hexagon.h \
+    comida.h \
+    plataformas.h
 
 LIBS += -lglut -lGLU -lGL

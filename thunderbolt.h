@@ -14,10 +14,7 @@ public:
                 float _ydab, float _xiab, float _yiab, array <float,3> color, int _parImpar);
     void draw();
     void traslacion();
-    void disappear();
     float distance(float _x, float _y);
-    array<float,3> getColor() const;
-    void setColor(array<float,3> _color);
     int getParImpar() const;
     void setParImpar(int value);
     float getXDAB() const;

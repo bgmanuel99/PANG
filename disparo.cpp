@@ -2,13 +2,13 @@
 #include <GL/glut.h>
 #include <math.h>
 
-Disparo::Disparo(float _radio, float _x, float _y, float _yv, array <float,3> color):
+Disparo::Disparo(float _radio, float _x, float _y, float _yv, float _xv, array <float,3> color):
     Figure{0, 0, color},
     radio{_radio}
 {
     y = _y;
     x = _x;
-    xv = 0.04;
+    xv = _xv;
     yv = _yv;
 }
 
@@ -30,14 +30,10 @@ void Disparo::draw()
 void Disparo::traslacion()
 {
     y += yv;
+    x += xv;
 }
 
 float Disparo::distance(float _x, float _y)
-{
-
-}
-
-void Disparo::disappear()
 {
 
 }

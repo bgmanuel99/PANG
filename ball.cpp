@@ -2,17 +2,25 @@
 #include <GL/glut.h>
 #include <math.h>
 
-Ball::Ball(float _radio, float _x, float _xv, array <float,3> color, float _xmax, float _xmin, float _ymax, float _ymin):
-    Figure{0, 0, color},
+Ball::Ball(float _radio, float _x, float _y, array <float,3> color, float _xmax, float _xmin, float _ymax, float _ymin,
+           float _ballXmax, float _ballXmin, float _ballYmax, float _ballYmin, float _xv, float _yv,
+           float _ax, float _ay):
+    Figure{_x, _y, color},
     radio{_radio},
     xmax{_xmax},
     ymin{_ymin},
     xmin{_xmin},
-    ymax{_ymax}
+    ymax{_ymax},
+    ax{_ax},
+    ay{_ay}
 {
-    x = _x;
     xv = _xv;
-    yv = -0.02;
+    yv = _yv;
+    dibujado = true;
+    ballXmax = x + _ballXmax;
+    ballXmin = x - _ballXmin;
+    ballYmax = y + _ballYmax;
+    ballYmin = y - _ballYmin;
 }
 
 void Ball::draw()
@@ -32,24 +40,27 @@ void Ball::draw()
 
 void Ball::traslacion()
 {
-    x += xv;
-    if(x > xmax || x < xmin){
+    x = x + xv*0.05 + ax*0.05*0.05/2.0;
+    y = y + yv*0.05 + ay*0.05*0.05/2.0;
+
+    xv = xv + ax*0.05;
+    yv = yv + ay*0.05;
+
+    if(y < ymin){
+        yv *= -1;
+    }
+
+    if(y > ymax){
+        yv *= -1;
+    }
+
+    if(x < xmin){
         xv *= -1;
     }
 
-    y += yv;
-    if(y > ymax || y < ymin) yv *= -1;
-    if(y > 0.0 && y < 0.3) yv -= 0.001;
-    if(y > 0.3 && y < 0.5) yv -= 0.001;
-}
-
-void Ball::disappear()
-{
-    color = {0.5, 1.0, 1.0};
-    xv = 0.0;
-    yv = 0.0;
-    x = 0.8;
-    y = 0.8;
+    if(x > xmax){
+        xv *= -1;
+    }
 }
 
 float Ball::distance(float _x, float _y)
@@ -57,17 +68,73 @@ float Ball::distance(float _x, float _y)
     return sqrt (((_x - x) * (_x - x)) + ((_y - y) * (_y - y)));
 }
 
-array<float, 3> Ball::getColor()
+float Ball::getBallXmax() const
 {
-    return color;
+    return ballXmax;
 }
 
-void Ball::setX(float _x)
+void Ball::setBallXmax(float value)
 {
-    x = _x;
+    ballXmax = value;
 }
 
-void Ball::setY(float _y)
+float Ball::getBallXmin() const
 {
-    y = _y;
+    return ballXmin;
 }
+
+void Ball::setBallXmin(float value)
+{
+    ballXmin = value;
+}
+
+float Ball::getBallYmax() const
+{
+    return ballYmax;
+}
+
+void Ball::setBallYmax(float value)
+{
+    ballYmax = value;
+}
+
+float Ball::getBallYmin() const
+{
+    return ballYmin;
+}
+
+void Ball::setBallYmin(float value)
+{
+    ballYmin = value;
+}
+
+bool Ball::getDibujado() const
+{
+    return dibujado;
+}
+
+void Ball::setDibujado(bool value)
+{
+    dibujado = value;
+}
+
+float Ball::getAx() const
+{
+    return ax;
+}
+
+void Ball::setAx(float value)
+{
+    ax = value;
+}
+
+float Ball::getAy() const
+{
+    return ay;
+}
+
+void Ball::setAy(float value)
+{
+    ay = value;
+}
+

@@ -84,24 +84,9 @@ void ThunderBolt::traslacion()
 
 }
 
-void ThunderBolt::disappear()
-{
-
-}
-
 float ThunderBolt::distance(float _x, float _y)
 {
 
-}
-
-array<float,3> ThunderBolt::getColor() const
-{
-    return color;
-}
-
-void ThunderBolt::setColor(array<float,3> _color)
-{
-    color = _color;
 }
 
 int ThunderBolt::getParImpar() const
